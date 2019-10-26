@@ -5,12 +5,17 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import java.io.File
 import java.util.*
 
 object ImageDownloadManager {
 
     fun downloadFromUrl(activity: Activity, folderName: String, url: String) {
-        val path = "${Environment.getExternalStorageDirectory()}/$folderName"
+        val path = "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)}/$folderName"
+        val file = File(path)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
         val downloadManager = activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val uri = Uri.parse(url)
         val request = DownloadManager.Request(uri)

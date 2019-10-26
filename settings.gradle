@@ -1,0 +1,2 @@
+include ':app', ':imagescorelib'
+rootProject.name='ImagesLib'
